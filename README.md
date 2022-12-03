@@ -16,4 +16,6 @@ Finally, the tree was visualized via ggtree (Yu 2020) and ggtreeExtra (Xu et al.
 
 ![alt text](general_tree.png)
 
-Discalimers:
+Disclaimers:
+Rather than, a given product, the purpose of the scripts given is to demonstrate the project. therefore, the code for all of the above is heavily environment-dependent, as the ones of you who dive into it probably saw. In addition, some files, e.g., HMM files, hmmsearch files, and of course the huge FASTA files are excluded for memory reasons.
+Having said that, I would love to assist anyone interested, please feel free to reach out if you wish.
