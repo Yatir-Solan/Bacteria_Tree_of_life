@@ -19,5 +19,5 @@ fig <- fig + geom_tiplab(colour='black',
                         offset=0.01, align=FALSE, 
                         linesize=1, linetype='dotted', 
                         show.legend=FALSE) # leaf label (family/order) next to phylum/class
-ggsave("C:/Users/Yatir/OneDrive/code/general/general_tree.svg")
+ggsave("C:/Users/Yatir/OneDrive/code/general/all_bacteria_tree.svg")
 print(fig)
