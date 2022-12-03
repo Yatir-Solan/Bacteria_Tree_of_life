@@ -12,5 +12,4 @@ All 88 profiles were searched using hmmsearch by HMMER3, against the non-redunda
 
 Each genome representative of the aforementioned 15 hits, was parsed into single sequences FASTA files, then using MAFFT, MSA was constructed upon every ribosomal protein. Sorted in the same order, the 15 distinctive alignment FASTA files of all genomes were concatenated, to create a united MSA, 5,835 Amino Acid (AA) long. At last, the concatenated MSA underwent tree construction by the FastTree program (Price, Dehal, and Arkin 2009) with default parameters.
 
-
-![alt text](general_tree.pdf)
+Finally, the tree was visualized via ggtree (Yu 2020) and ggtreeExtra (Xu et al. 2021), R programming language packages.
