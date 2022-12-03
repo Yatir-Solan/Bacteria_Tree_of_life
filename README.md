@@ -14,7 +14,7 @@ Each genome representative of the aforementioned 15 hits, was parsed into single
 
 Finally, the tree was visualized via ggtree (Yu 2020) and ggtreeExtra (Xu et al. 2021), R programming language packages.
 
-![alt text](general_tree.png)
+![alt text](all_bacteria_tree.png)
 
 <strong>Disclaimers:</strong>
 
