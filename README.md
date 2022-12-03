@@ -14,6 +14,6 @@ Each genome representative of the aforementioned 15 hits, was parsed into single
 
 Finally, the tree was visualized via ggtree (Yu 2020) and ggtreeExtra (Xu et al. 2021), R programming language packages.
 
-![](general_tree.pdf)
+![alt text](general_tree.png)
 
 Discalimers:
