@@ -11,3 +11,6 @@ Given principles showed in previous work (Hug et al. 2016), 15 bacterial ribosom
 All 88 profiles were searched using hmmsearch by HMMER3, against the non-redundant NCBI’s RefSeq database, which was filtered from candidate taxonomies. The hmmsearch was fixed with 1∙10^(-12) as the Evalue threshold, and only genomes which accumulated hits associated with all 15 ribosomal proteins continued for the following. Each bacterial family was represented by a genome of its kind (In case of redundancy, genomes were chosen randomly). To conclude, 508 genomes of bacterial families' representatives, which comprise highly related ribosomal proteins, were chosen to work with. 
 
 Each genome representative of the aforementioned 15 hits, was parsed into single sequences FASTA files, then using MAFFT, MSA was constructed upon every ribosomal protein. Sorted in the same order, the 15 distinctive alignment FASTA files of all genomes were concatenated, to create a united MSA, 5,835 Amino Acid (AA) long. At last, the concatenated MSA underwent tree construction by the FastTree program (Price, Dehal, and Arkin 2009) with default parameters.
+
+
+![alt text](general_tree.pdf)
