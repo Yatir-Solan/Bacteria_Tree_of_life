@@ -214,18 +214,18 @@ def leaf_verifier(tree_file, rank, taxid_map, ncbi, directory):
         error_ranks.append(list(itertools.chain.from_iterable(ranks)))
     error_ranks = list(itertools.chain.from_iterable(error_ranks))
     error_ranks = [str(rnk) for rnk in error_ranks] # added after figuering that the output is actualy integers.
-    with open(os.path.join(directory,f'review_{rank}_to_offset.pkl'),'wb') as f:
-        pickle.dump(error_ranks,f)
+    with open(os.path.join(directory,f'review_{rank}_to_offset.pkl'), 'wb') as f:
+        pickle.dump(error_ranks, f)
 
     return error_ranks
 
 ########################################################
 
 def metadata(conc_algn,taxid_map,ncbi):
-    header_phylum_dic = {aligned_seq.name.split(' ',1)[0]:aligned_seq.description.split('OX=')[-1] for aligned_seq in conc_algn} # {'Oscillochloridaceae':'765420', 'Gallionellaceae': 1188319',...}
+    header_phylum_dic = {aligned_seq.name.split(' ', 1)[0]:aligned_seq.description.split('OX=')[-1] for aligned_seq in conc_algn} # {'Oscillochloridaceae':'765420', 'Gallionellaceae': 1188319',...}
     header_phylum_dic = {header_name:taxid_map.get(rank_taxid).get('phylum') for header_name,rank_taxid in header_phylum_dic.items()} # the taxids here are of the phylum rank.
     header_phylum_dic = {header_name:taxid_to_name(rank_phylum, ncbi) for header_name,rank_phylum in header_phylum_dic.items()} # values here altered from phylums taxids to their actual names.
-    dic_for_df = {'rnk_txn':list(),'rnk_txd':list(),'phylum':list()} #,'color':list()}
+    dic_for_df = {'rnk_txn':list(), 'rnk_txd':list(), 'phylum':list()} #,'color':list()}
     for hdr,phylum in header_phylum_dic.items():
         dic_for_df.get('rnk_txn').append(hdr)
         dic_for_df.get('rnk_txd').append(name_to_taxid(hdr.replace('_',' '), ncbi))
@@ -233,9 +233,9 @@ def metadata(conc_algn,taxid_map,ncbi):
     mtdta_df = pd.DataFrame.from_dict(dic_for_df)
     # colours section - it is probabely should be removed later.
     no_of_colors = len(set(header_phylum_dic.values())) # number of colors as the number of phylums
-    colors = ["#"+''.join([random.choice('0123456789ABCDEF') for i in range(6)]) for j in range(no_of_colors)] # list of colors as the nunber of phylums...
-    colors = dict(zip(set(header_phylum_dic.values()),colors)) # mapping all the phylums into color
-    mtdta_df['color'] = mtdta_df.loc[:,'phylum'].apply(lambda phyl:colors.get(phyl))
+    colors = ['#'+''.join([random.choice('0123456789ABCDEF') for i in range(6)]) for j in range(no_of_colors)] # list of colors as the nunber of phylums...
+    colors = dict(zip(set(header_phylum_dic.values()), colors)) # mapping all the phylums into color
+    mtdta_df['color'] = mtdta_df.loc[:, 'phylum'].apply(lambda phyl:colors.get(phyl))
     # colours section - end
 
     # # # new part
@@ -268,7 +268,7 @@ def naming_inner_nodes(tree_file, mtdta_df):
     tree = Tree(tree_file)
     missing_inner_nodes = list()
     for phyla_name, sub_df in mtdta_df.groupby('phyla_class'):
-        node = tree.get_common_ancestor(list(sub_df.loc[:,'rnk_txn']))    
+        node = tree.get_common_ancestor(list(sub_df.loc[:, 'rnk_txn']))    
         if node.is_root():
             missing_inner_nodes.append(phyla_name)
             continue
@@ -304,7 +304,7 @@ def main(hmm = phylogenetics.ribosomal_HMMs('HMMs'),
 
     pickle_file = databases.ref_seq_file_paths('bacteria_SeqIO_dic_pickle')
     if os.path.isfile(pickle_file):
-        target = pickle.load(open(pickle_file,'rb')) # if the 'if' statement is False the target is being brought from the function 'target' default value.
+        target = pickle.load(open(pickle_file, 'rb')) # if the 'if' statement is False the target is being brought from the function 'target' default value.
 
     if filter_leaves:
         tree_file,cncatntd_MSA = tree_construction_pipeline(hmmsdf, rank, target, directory, taxid_map, ncbi, filter_leaves)
@@ -318,7 +318,7 @@ def main(hmm = phylogenetics.ribosomal_HMMs('HMMs'),
     tree, missing_inner_nodes = naming_inner_nodes(tree_file, mtdta_df)
     tree.write(outfile=tree_file, format=1) # overides the original newick file. (format 1 is nesceserry for the label name to be inside the newick output).
     mtdta_df.to_csv(os.path.join(directory, f"review_{rank}_phylogenetic_mtdta{'_filtered' if filter_leaves else str()}.tsv"), index=None, sep='\t')
-    with open(os.path.join(directory, f"review_{rank}_missing_inner_nodes{'_filtered' if filter_leaves else str()}.pkl"),'wb') as f:
+    with open(os.path.join(directory, f"review_{rank}_missing_inner_nodes{'_filtered' if filter_leaves else str()}.pkl"), 'wb') as f:
         pickle.dump(missing_inner_nodes, f)
 
 ### main ### main ### main ### main ### main ### main ###
